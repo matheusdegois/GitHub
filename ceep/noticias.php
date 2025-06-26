@@ -1,21 +1,34 @@
-<?php include_once 'includes/header.php'; ?>
+<?php 
+include_once 'includes/header.php'; 
+include('conexao.php');
+?>
    
 <section class="container my-5">
   <div class="row justify-content-center g-4">
 
+
+    <?php
+        $sql = $conn->prepare("SELECT * FROM noticias");
+        $sql->execute();
+        while ($dados = $sql->fetch()) {
+    ?>
+
     <!-- Notícia 1 -->
     <div class="col-12 col-md-6 col-lg-4">
-      <a href="noticiasdetalhes.php" class="text-decoration-none text-dark d-block h-100">
+      <a href="noticiasdetalhes.php?id=<?php echo $dados['id']?>" class="text-decoration-none text-dark d-block h-100">
         <div class="news-card text-center p-4 h-100">
           <div class="d-flex justify-content-center mb-4">
-            <img src="img/edicacoes.jpeg" class="card-img-top rounded shadow-sm" alt="Notícia 1" style="height: 200px; object-fit: cover;">
+            <img src="projetoFinalAdmin/uploads/<?php echo $dados['imagem']; ?>" class="card-img-top rounded shadow-sm img-fluid" alt="Notícia 1" style="height: 200px; object-fit: cover;">
+
           </div>
-          <h6 class="fw-bold text-uppercase text-primary-custom">Aula Virtual na Usina de Salto Santiago – ENGIE</h6>
+          <h6 class="fw-bold text-uppercase text-primary-custom"><?php echo $dados['titulo'];?></h6>
         </div>
       </a>
     </div>
 
-    <!-- Notícia 2 -->
+    <?php } ?>
+
+    <!--
     <div class="col-12 col-md-6 col-lg-4">
       <a href="noticiasdetalhes.php" class="text-decoration-none text-dark d-block h-100">
         <div class="news-card text-center p-4 h-100">
@@ -27,7 +40,7 @@
       </a>
     </div>
 
-    <!-- Notícia 3 -->
+    
     <div class="col-12 col-md-6 col-lg-4">
       <a href="noticiasdetalhes.php" class="text-decoration-none text-dark d-block h-100">
         <div class="news-card text-center p-4 h-100">
@@ -44,7 +57,7 @@
 <section class="container my-5">
   <div class="row justify-content-center g-4">
 
-    <!-- Notícia 1 -->
+   
     <div class="col-12 col-md-6 col-lg-4">
       <a href="noticiasdetalhes.php" class="text-decoration-none text-dark d-block h-100">
         <div class="news-card text-center p-4 h-100">
@@ -56,7 +69,7 @@
       </a>
     </div>
 
-    <!-- Notícia 2 -->
+    
     <div class="col-12 col-md-6 col-lg-4">
       <a href="noticiasdetalhes.php" class="text-decoration-none text-dark d-block h-100">
         <div class="news-card text-center p-4 h-100">
@@ -68,7 +81,7 @@
       </a>
     </div>
 
-    <!-- Notícia 3 -->
+    
     <div class="col-12 col-md-6 col-lg-4">
       <a href="noticiasdetalhes.php" class="text-decoration-none text-dark d-block h-100">
         <div class="news-card text-center p-4 h-100">
@@ -79,7 +92,7 @@
         </div>
       </a>
     </div>
-  </div>
+  </div> -->
 </section>
 
 <section class="container my-5">

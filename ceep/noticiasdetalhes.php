@@ -1,36 +1,54 @@
-<?php include_once 'includes/header.php'; ?>
-<div class="container py-4">
-    <h3 class=" section-title text-center mb-5">Volta às Aulas 2025</h3>
+<?php
+include_once 'includes/header.php';
+include('conexao.php');
+$id = $_GET['id'];
+?>
 
-    <div class="texto-noticia">
-        <img src="img/FACHADA.jpg" alt="Volta às Aulas"
-            class="float-start me-3 mb-2 rounded-4 shadow-sm"
-            style="width: 450px; height: 290px; object-fit: cover;">
+<?php
+$sql = $conn->prepare("SELECT * FROM noticias where id='$id'");
+$sql->execute();
+while ($dados = $sql->fetch()) {
+    ?>
 
-        O retorno às aulas marca o início de mais um ciclo de descobertas, desafios e conquistas. Estamos extremamente felizes em receber nossos alunos para mais um ano letivo repleto de aprendizado, amizades e crescimento pessoal. Nossa equipe está preparada para oferecer um ambiente acolhedor, seguro e estimulante, onde cada estudante possa desenvolver todo o seu potencial. Desde o primeiro dia, queremos que todos se sintam motivados, curiosos e prontos para viver novas experiências.
+    <div class="container py-4">
+        <h3 class="section-title text-center mb-5"><?php echo $dados['titulo']; ?></h3>
 
-        Reforçamos também a importância das medidas de segurança: o uso de máscaras continua sendo necessário em ambientes fechados, e o uso de álcool em gel está disponível em diversos pontos da escola. A saúde de todos é nossa prioridade. Desejamos um excelente ano letivo a todos! Que seja uma jornada inspiradora, produtiva e cheia de boas memórias. Sejam bem-vindos de volta!
-        Reforçamos também a importância das medidas de segurança: o uso de máscaras continua sendo necessário em ambientes fechados, e o uso de álcool em gel está disponível em diversos pontos da escola. A saúde de todos é nossa prioridade. Desejamos um excelente ano letivo a todos! Que seja uma jornada inspiradora, produtiva e cheia de boas memórias. Sejam bem-vindos de volta!
+        <div class="texto-noticia">
+            <img src="projetoFinalAdmin/uploads/<?php echo $dados['imagem']; ?>"
+                class="float-start me-3 mb-2 rounded-4 shadow-sm" style="width: 450px; height: 290px; object-fit: cover;">
 
-        Reforçamos também a importância das medidas de segurança: o uso de máscaras continua sendo necessário em ambientes fechados, e o uso de álcool em gel está disponível em diversos pontos da escola. A saúde de todos é nossa prioridade. Desejamos um excelente ano letivo a todos! Que seja uma jornada inspiradora, produtiva e cheia de boas memórias. Sejam bem-vindos de volta!
-    </div>
-    <br>
+            <?php echo $dados['texto']; ?>
+        </div>
+        <br>
+
+    <?php } ?> 
 
     <div class="card shadow-sm bg-white border-0">
 
         <div class="card-body">
             <div class="carousel-galeria js-flickity" data-flickity='{
-  "wrapAround": true,
-  "pageDots": false,
-  "autoPlay": 2500,
-  "draggable": true
-}'>
-                <div class="carousel-cell">
-                    <a data-fancybox="galeria" href="img/eletrotecnica.jpeg">
-                        <img src="img/eletrotecnica.jpeg" class="galeria-img img-fluid rounded shadow-sm" alt="Foto 1">
-                    </a>
-                </div>
-                <div class="carousel-cell">
+                                                                       "wrapAround": true,
+                                                                       "pageDots": false,
+                                                                       "autoPlay": 2500,
+                                                                       "draggable": true
+                                                                    }'>
+
+                <?php
+                $sql = $conn->prepare("SELECT * FROM noticias_imagens where id='$id'");
+                $sql->execute();
+                
+                while ($dados = $sql->fetch()) {
+                    ?>
+
+                    <div class="carousel-cell">
+                        <a data-fancybox="galeria" href="img/eletrotecnica.jpeg">
+                            <img src="projetoFinalAdmin/uploads/<?php echo $dados['imagem'] ?>" class="galeria-img img-fluid rounded shadow-sm" alt="Foto 1">
+                        </a>
+                    </div>
+
+                <?php } ?>
+
+                <!--      <div class="carousel-cell">
                     <a data-fancybox="galeria" href="img/enfermagem.jpeg">
                         <img src="img/enfermagem.jpeg" class="galeria-img img-fluid rounded shadow-sm" alt="Foto 2">
                     </a>
@@ -49,7 +67,7 @@
                     <a data-fancybox="galeria" href="img/estacionamento.jpeg">
                         <img src="img/estacionamento.jpeg" class="galeria-img img-fluid rounded shadow-sm" alt="Foto 3">
                     </a>
-                </div>
+                </div> -->
                 <!-- Adicione mais imagens aqui -->
             </div>
 

@@ -42,7 +42,7 @@ while ($dados = $sql->fetch()) {
 
                     <div class="carousel-cell">
                         <a data-fancybox="galeria" href="img/eletrotecnica.jpeg">
-                            <img src="projetoFinalAdmin/uploads/<?php echo $dados['imagem'] ?>" class="galeria-img img-fluid rounded shadow-sm" alt="Foto 1">
+                            <img src="projetoFinalAdmin/uploads/<?php echo $dados['nome_arquivo'] ?>" class="galeria-img img-fluid rounded shadow-sm" alt="Foto 1">
                         </a>
                     </div>
 
